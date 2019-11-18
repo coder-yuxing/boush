@@ -20,17 +20,17 @@ public class PropertyHandler {
     /**
      * 解析配置文件
      *
-     * @return BoushProperty
+     * @return
      * @throws IOException
      */
-    public BoushProperty handle() throws IOException {
+    public JdbcProperty jdbcPropertyHandle() throws IOException {
         Properties config = this.readConfig();
-        BoushProperty boushProperty = new BoushProperty();
-        boushProperty.setDriverClassName(config.getProperty("driver-class-name"));
-        boushProperty.setUrl(config.getProperty("url"));
-        boushProperty.setUsername(config.getProperty("username"));
-        boushProperty.setPassword(config.getProperty("password"));
-        return boushProperty;
+        JdbcProperty property = new JdbcProperty();
+        property.setDriverClassName(config.getProperty("driver-class-name"));
+        property.setUrl(config.getProperty("url"));
+        property.setUsername(config.getProperty("username"));
+        property.setPassword(config.getProperty("password"));
+        return property;
     }
 
     /**

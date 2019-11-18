@@ -13,7 +13,7 @@ public class PropertyHandlerTest {
     public void  handleTest() throws Exception {
 
         PropertyHandler propertyHandler = new PropertyHandler();
-        BoushProperty handle = propertyHandler.handle();
-        Assert.assertEquals("Wge2I9RQZEZ9PJYQ", handle.getPassword());
+        JdbcProperty jdbcProperty = propertyHandler.jdbcPropertyHandle();
+        Assert.assertEquals("Wge2I9RQZEZ9PJYQ", jdbcProperty.getPassword());
     }
 }
