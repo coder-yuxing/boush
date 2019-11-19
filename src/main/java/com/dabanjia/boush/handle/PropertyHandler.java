@@ -1,4 +1,6 @@
-package com.dabanjia.boush.property;
+package com.dabanjia.boush.handle;
+
+import com.dabanjia.boush.domain.JdbcProperty;
 
 import java.io.IOException;
 import java.io.InputStream;

@@ -1,5 +1,7 @@
 package com.dabanjia.boush.property;
 
+import com.dabanjia.boush.domain.JdbcProperty;
+import com.dabanjia.boush.handle.PropertyHandler;
 import org.junit.Assert;
 import org.junit.Test;
 

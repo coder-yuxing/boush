@@ -1,4 +1,4 @@
-package com.dabanjia.boush.jdbc;
+package com.dabanjia.boush.domain;
 
 import lombok.Data;
 
@@ -17,6 +17,10 @@ public class TableMetaData {
      * 表名
      */
     private String tableName;
+
+    private String namespace;
+
+    private String modelName;
 
     /**
      * 列数据

@@ -1,4 +1,4 @@
-package com.dabanjia.boush.property;
+package com.dabanjia.boush.domain;
 
 import lombok.Data;
 
@@ -10,6 +10,5 @@ import lombok.Data;
  */
 @Data
 public class BoushProperty {
-
 
 }

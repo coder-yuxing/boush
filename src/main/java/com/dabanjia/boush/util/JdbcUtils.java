@@ -1,7 +1,10 @@
-package com.dabanjia.boush.jdbc;
+package com.dabanjia.boush.util;
 
-import com.dabanjia.boush.property.JdbcProperty;
-import com.dabanjia.boush.property.PropertyHandler;
+import com.dabanjia.boush.constant.SqlMappingJavaTypeEnum;
+import com.dabanjia.boush.domain.ColumnMetaData;
+import com.dabanjia.boush.domain.TableMetaData;
+import com.dabanjia.boush.domain.JdbcProperty;
+import com.dabanjia.boush.handle.PropertyHandler;
 
 import java.io.IOException;
 import java.sql.*;
@@ -63,8 +66,8 @@ public class JdbcUtils {
         for (int i = 1; i <= metaData.getColumnCount(); i++) {
             ColumnMetaData columnMetaData = new ColumnMetaData();
             columnMetaData.setColumnName(metaData.getColumnName(i));
-            columnMetaData.setFieldName(metaData.getColumnName(i));
-            columnMetaData.setFieldType(metaData.getColumnTypeName(i));
+            columnMetaData.setFieldName(StringUtils.underline2Hump(metaData.getColumnName(i)));
+            columnMetaData.setMappingType(SqlMappingJavaTypeEnum.getBySqlType(metaData.getColumnTypeName(i)));
             columns.add(columnMetaData);
         }
         return result;

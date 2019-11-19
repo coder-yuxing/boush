@@ -1,5 +1,6 @@
-package com.dabanjia.boush.jdbc;
+package com.dabanjia.boush.util;
 
+import com.dabanjia.boush.domain.TableMetaData;
 import org.junit.Test;
 
 /**

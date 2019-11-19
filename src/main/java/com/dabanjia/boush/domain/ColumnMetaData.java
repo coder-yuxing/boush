@@ -1,5 +1,6 @@
-package com.dabanjia.boush.jdbc;
+package com.dabanjia.boush.domain;
 
+import com.dabanjia.boush.constant.SqlMappingJavaTypeEnum;
 import lombok.Data;
 
 /**
@@ -21,8 +22,10 @@ public class ColumnMetaData {
      */
     private String fieldName;
 
+    private String columnNameList;
+
     /**
-     * 字段类型
+     * 字段类型映射
      */
-    private String fieldType;
+    private SqlMappingJavaTypeEnum mappingType;
 }
