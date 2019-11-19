@@ -6,5 +6,5 @@ package com.dabanjia.boush.domain;
  * @author GuangRen
  * @date 2019/11/19
  */
-public class MapperBeanMetaDta {
+public class BeanMapperMetaDta {
 }
