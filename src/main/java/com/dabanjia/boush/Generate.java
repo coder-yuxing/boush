@@ -41,22 +41,4 @@ public class Generate {
         collect.forEach(rethrowConsumer(FreemarkerUtils::write));
     }
 
-
-    public static void main(String[] args) throws Exception {
-        TableConfig tableConfig = TableConfig.builder().tableName("uac_user").beanName("User").remarks("用户").build();
-        GlobalConfig globalConfig = GlobalConfig.builder()
-                .author("GuangRen")
-                .datePattern("yyyy/MM/dd")
-                .isCover(false)
-                .beanModuleName("")
-                .beanPackage("com.dabanjia.boush.dao.model")
-                .mapperModuleName("")
-                .beanMapperPackage("com.dabanjia.boush.dao.mapper")
-                .mapperPackage("com.dabanjia.boush.dao.xml")
-                .tableConfigs(Collections.singletonList(tableConfig)).build();
-
-        new Generate(globalConfig).execute();
-
-    }
-
 }
