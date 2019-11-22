@@ -22,6 +22,8 @@ public class TableMetaData {
 
     private String modelName;
 
+    private String columnNameList;
+
     /**
      * 列数据
      */

@@ -18,7 +18,7 @@ public class StringUtils {
      * @return
      */
     public static String underline2Hump(String str) {
-        if (str == null || str.trim().length() == 0) {
+        if (isEmpty(str)) {
             return str;
         }
 
@@ -43,5 +43,14 @@ public class StringUtils {
         char[] chars = var.toCharArray();
         chars[0] = Character.toUpperCase(chars[0]);
         return new String(chars);
+    }
+
+    /**
+     * 是否为空
+     * @param str
+     * @return
+     */
+    public static boolean isEmpty(String str) {
+        return str == null || str.trim().length() == 0;
     }
 }

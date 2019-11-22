@@ -51,42 +51,47 @@ public class JdbcUtils {
      * @return
      * @throws Exception
      */
-    public static TableMetaData getTableMetaDataByTableName(String tableName) throws Exception {
-        ResultSetMetaData metaData = getMetaData(tableName);
-        if (metaData != null) {
-            return parseMetaData(metaData);
-        }
-        return null;
-    }
-
-    private static TableMetaData parseMetaData(ResultSetMetaData metaData) throws Exception {
-        TableMetaData result = new TableMetaData();
-        List<ColumnMetaData> columns = new ArrayList<>(metaData.getColumnCount());
-        result.setColumns(columns);
-        for (int i = 1; i <= metaData.getColumnCount(); i++) {
-            ColumnMetaData columnMetaData = new ColumnMetaData();
-            columnMetaData.setColumnName(metaData.getColumnName(i));
-            columnMetaData.setFieldName(StringUtils.underline2Hump(metaData.getColumnName(i)));
-            columnMetaData.setMappingType(SqlMappingJavaTypeEnum.getBySqlType(metaData.getColumnTypeName(i)));
-            columns.add(columnMetaData);
-        }
-        return result;
-    }
-
-    private static ResultSetMetaData getMetaData(String tableName)  {
+    public static List<ColumnMetaData> getTableMetaDataByTableName(String tableName) throws Exception {
+        final String sql = "select column_name columnName, data_type dataType, column_comment columnComment, column_key columnKey, extra from information_schema.columns\n" +
+                " \t\t\twhere table_name = \"{0}\" and table_schema = (select database()) order by ordinal_position";
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         try {
             connection = getConnection();
-            String sql = "SELECT *  FROM {0} LIMIT 1";
             preparedStatement = connection.prepareStatement(MessageFormat.format(sql, tableName));
             resultSet = preparedStatement.executeQuery();
-            return resultSet.getMetaData();
+            if (resultSet != null) {
+                return parseMetaData(resultSet);
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            if (resultSet != null) {
+            close(connection,preparedStatement, resultSet);
+        }
+        return null;
+    }
+
+    private static List<ColumnMetaData> parseMetaData(ResultSet metaData) throws Exception {
+        List<ColumnMetaData> columns = new ArrayList<>(metaData.getRow());
+        while (metaData.next()) {
+            ColumnMetaData columnMetaData = new ColumnMetaData();
+            String columnName = metaData.getString("columnName");
+            String dataType = metaData.getString("dataType");
+            String remarks = metaData.getString("columnComment");
+            String key = metaData.getString("columnKey");
+            columnMetaData.setColumnName(columnName);
+            columnMetaData.setFieldName(StringUtils.underline2Hump(columnName));
+            columnMetaData.setMappingType(SqlMappingJavaTypeEnum.getBySqlType(dataType));
+            columnMetaData.setRemarks(remarks);
+            columnMetaData.setIsPrimaryKey(!StringUtils.isEmpty(key));
+            columns.add(columnMetaData);
+        }
+        return columns;
+    }
+
+    private static void close(Connection connection, PreparedStatement preparedStatement, ResultSet resultSet) {
+        if (resultSet != null) {
                 try {
                     resultSet.close();
                 } catch (SQLException e) {
@@ -94,22 +99,20 @@ public class JdbcUtils {
                 }
             }
 
-            if (preparedStatement != null) {
-                try {
-                    preparedStatement.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-
-            if (connection != null) {
-                try {
-                    connection.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
+        if (preparedStatement != null) {
+            try {
+                preparedStatement.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
         }
-        return null;
+
+        if (connection != null) {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

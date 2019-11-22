@@ -22,7 +22,15 @@ public class ColumnMetaData {
      */
     private String fieldName;
 
-    private String columnNameList;
+    /**
+     * 注释
+     */
+    private String remarks;
+
+    /**
+     * 是否为主键
+     */
+    private Boolean isPrimaryKey;
 
     /**
      * 字段类型映射

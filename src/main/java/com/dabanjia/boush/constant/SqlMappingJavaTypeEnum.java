@@ -30,7 +30,7 @@ public enum SqlMappingJavaTypeEnum {
 
     TIMESTAMP_2_DATE("TIMESTAMP", "Date", true, "java.util.Date"),
 
-    INTEGER_2_INTEGER("INTEGER", "Integer", false, "java.lang.Integer"),
+    INTEGER_2_INTEGER("INT", "Integer", false, "java.lang.Integer"),
     ;
 
 
@@ -58,7 +58,7 @@ public enum SqlMappingJavaTypeEnum {
         if (sqlType != null && sqlType.length() > 0) {
             SqlMappingJavaTypeEnum[] values = SqlMappingJavaTypeEnum.values();
             for (SqlMappingJavaTypeEnum value : values) {
-                if (value.sqlType.equals(sqlType)) {
+                if (value.sqlType.equalsIgnoreCase(sqlType)) {
                     return value;
                 }
             }

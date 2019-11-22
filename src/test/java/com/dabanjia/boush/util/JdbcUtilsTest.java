@@ -1,7 +1,11 @@
 package com.dabanjia.boush.util;
 
+import com.dabanjia.boush.domain.ColumnMetaData;
 import com.dabanjia.boush.domain.TableMetaData;
 import org.junit.Test;
+
+import java.io.File;
+import java.util.List;
 
 /**
  * @author GuangRen
@@ -11,7 +15,11 @@ public class JdbcUtilsTest {
 
     @Test
     public void test() throws Exception {
-        TableMetaData tableMetaData = JdbcUtils.getTableMetaDataByTableName("uac_user");
-        System.out.println(tableMetaData);
+//        List<ColumnMetaData> columns = JdbcUtils.getTableMetaDataByTableName("uac_user");
+//        System.out.println(columns);
+
+        String absolutePath = new File("").getAbsolutePath();
+
+        System.err.println(absolutePath);
     }
 }
