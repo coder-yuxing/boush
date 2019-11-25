@@ -29,7 +29,7 @@ public class MapperMetaData {
         List<ColumnMetaData> collect = columns.stream().filter(ColumnMetaData::getIsPrimaryKey).limit(1).collect(toList());
         ColumnMetaData columnMetaData = collect.get(0);
         mapperMetaData.setIdColumnName(columnMetaData.getColumnName());
-        mapperMetaData.setIdType(columnMetaData.getMappingType().getJavaType());
+        mapperMetaData.setIdType(columnMetaData.getMappingType().getClassName());
         mapperMetaData.setName(tableConfig.getBeanName() + "Mapper");
         return mapperMetaData;
     }
