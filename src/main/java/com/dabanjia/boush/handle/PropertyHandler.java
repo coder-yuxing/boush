@@ -1,9 +1,10 @@
 package com.dabanjia.boush.handle;
 
 import com.dabanjia.boush.domain.JdbcProperty;
+import lombok.extern.slf4j.Slf4j;
 
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.Properties;
 
 /**
@@ -12,12 +13,17 @@ import java.util.Properties;
  * @author GuangRen
  * @date 2019/11/18
  */
+@Slf4j
 public class PropertyHandler {
 
     /**
      * 配置文件地址
      */
-    private static final String CONFIG_PATH  = "/generate.properties";
+    private String configPath;
+
+    public PropertyHandler(String configPath) {
+        this.configPath = configPath;
+    }
 
     /**
      * 解析配置文件
@@ -43,8 +49,7 @@ public class PropertyHandler {
      */
     private Properties readConfig() throws IOException {
         Properties properties = new Properties();
-        InputStream inputStream = this.getClass().getResourceAsStream(CONFIG_PATH);
-        properties.load(inputStream);
+        properties.load(new InputStreamReader(PropertyHandler.class.getResourceAsStream(configPath), StandardCharsets.UTF_8));
         return properties;
     }
 }

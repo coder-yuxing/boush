@@ -15,6 +15,28 @@ import java.util.List;
 @Builder
 public class GlobalConfig {
 
+    /**
+     * 驱动全类名
+     */
+    private String driverClassName;
+
+    /**
+     * url
+     */
+    private String url;
+
+    /**
+     * 用户名
+     */
+    private String username;
+
+    /**
+     * 密码
+     */
+    private String password;
+
+    private String configPath;
+
     private String beanModuleName;
 
     private String beanPackage;

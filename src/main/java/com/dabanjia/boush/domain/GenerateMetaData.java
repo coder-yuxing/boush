@@ -17,7 +17,8 @@ public class GenerateMetaData {
     private GenerateMetaData() {}
 
     public static GenerateMetaData build(GlobalConfig config, TableConfig tableConfig) throws Exception {
-        List<ColumnMetaData> columns = JdbcUtils.getTableMetaDataByTableName(tableConfig.getTableName());
+        JdbcUtils jdbcUtils = new JdbcUtils(config.getConfigPath());
+        List<ColumnMetaData> columns = jdbcUtils.getTableMetaDataByTableName(tableConfig.getTableName());
         GenerateMetaData generateMetaData = new GenerateMetaData();
         generateMetaData.setBean(BeanMetaData.build(config, tableConfig, columns));
         generateMetaData.setBeanMapper(BeanMapperMetaDta.build(config, tableConfig));

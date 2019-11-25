@@ -1,13 +1,10 @@
 package com.dabanjia.boush;
 
 import com.dabanjia.boush.config.GlobalConfig;
-import com.dabanjia.boush.config.TableConfig;
 import com.dabanjia.boush.domain.*;
 import com.dabanjia.boush.util.FreemarkerUtils;
 
-import java.util.Arrays;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
 import static com.dabanjia.boush.util.LambdaExceptionUtils.rethrowConsumer;

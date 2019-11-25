@@ -1,6 +1,7 @@
 package com.dabanjia.boush.util;
 
 import com.dabanjia.boush.domain.FreemarkerOutPutMetaData;
+import freemarker.cache.ClassTemplateLoader;
 import freemarker.cache.FileTemplateLoader;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
@@ -22,12 +23,12 @@ public class FreemarkerUtils {
         return CONFIGURATION;
     }
 
-    public static FileTemplateLoader getFileTemplateLoader(String path) throws IOException {
-        return  new FileTemplateLoader(new File(FreemarkerUtils.class.getResource(path).getPath()));
+    public static ClassTemplateLoader getFileTemplateLoader(String path) throws IOException {
+        return new ClassTemplateLoader(FreemarkerUtils.class, path);
     }
 
     public static void write(FreemarkerOutPutMetaData metaData) throws Exception {
-        FileTemplateLoader classTemplateLoader = getFileTemplateLoader(metaData.getTemplatePath());
+        ClassTemplateLoader classTemplateLoader = getFileTemplateLoader(metaData.getTemplatePath());
         CONFIGURATION.setTemplateLoader(classTemplateLoader);
         Template template = CONFIGURATION.getTemplate(metaData.getTemplateName());
         String absolutePath = new File("").getAbsolutePath();

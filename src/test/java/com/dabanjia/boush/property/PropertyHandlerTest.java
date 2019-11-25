@@ -14,7 +14,7 @@ public class PropertyHandlerTest {
     @Test
     public void  handleTest() throws Exception {
 
-        PropertyHandler propertyHandler = new PropertyHandler();
+        PropertyHandler propertyHandler = new PropertyHandler("./generate.properties");
         JdbcProperty jdbcProperty = propertyHandler.jdbcPropertyHandle();
         Assert.assertEquals("Wge2I9RQZEZ9PJYQ", jdbcProperty.getPassword());
     }

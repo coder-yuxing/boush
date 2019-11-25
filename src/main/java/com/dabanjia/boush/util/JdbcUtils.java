@@ -2,7 +2,6 @@ package com.dabanjia.boush.util;
 
 import com.dabanjia.boush.constant.SqlMappingJavaTypeEnum;
 import com.dabanjia.boush.domain.ColumnMetaData;
-import com.dabanjia.boush.domain.TableMetaData;
 import com.dabanjia.boush.domain.JdbcProperty;
 import com.dabanjia.boush.handle.PropertyHandler;
 
@@ -20,13 +19,8 @@ import java.util.List;
  */
 public class JdbcUtils {
 
-    /**
-     * jdbc 配置
-     */
-    private static JdbcProperty config;
-
-    static {
-        PropertyHandler handler = new PropertyHandler();
+    public JdbcUtils(String configPath) {
+        PropertyHandler handler = new PropertyHandler(configPath);
         try {
             config = handler.jdbcPropertyHandle();
             Class.forName(config.getDriverClassName());
@@ -36,11 +30,17 @@ public class JdbcUtils {
     }
 
     /**
+     * jdbc 配置
+     */
+    private JdbcProperty config;
+
+
+    /**
      * 获取连接
      * @return
      * @throws SQLException
      */
-    public static Connection getConnection() throws SQLException {
+    public Connection getConnection() throws SQLException {
         return DriverManager.getConnection(config.getUrl(), config.getUsername(), config.getPassword());
     }
 
@@ -51,7 +51,7 @@ public class JdbcUtils {
      * @return
      * @throws Exception
      */
-    public static List<ColumnMetaData> getTableMetaDataByTableName(String tableName) throws Exception {
+    public List<ColumnMetaData> getTableMetaDataByTableName(String tableName) throws Exception {
         final String sql = "select column_name columnName, data_type dataType, column_comment columnComment, column_key columnKey, extra from information_schema.columns\n" +
                 " \t\t\twhere table_name = \"{0}\" and table_schema = (select database()) order by ordinal_position";
         Connection connection = null;
@@ -72,7 +72,7 @@ public class JdbcUtils {
         return null;
     }
 
-    private static List<ColumnMetaData> parseMetaData(ResultSet metaData) throws Exception {
+    private List<ColumnMetaData> parseMetaData(ResultSet metaData) throws Exception {
         List<ColumnMetaData> columns = new ArrayList<>(metaData.getRow());
         while (metaData.next()) {
             ColumnMetaData columnMetaData = new ColumnMetaData();
@@ -90,7 +90,7 @@ public class JdbcUtils {
         return columns;
     }
 
-    private static void close(Connection connection, PreparedStatement preparedStatement, ResultSet resultSet) {
+    private void close(Connection connection, PreparedStatement preparedStatement, ResultSet resultSet) {
         if (resultSet != null) {
                 try {
                     resultSet.close();
