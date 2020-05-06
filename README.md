@@ -17,6 +17,7 @@ password=Wge2I9RQZEZ9PJYQ
 public static void main(String[] args) throws Exception {
         TableConfig tableConfig = TableConfig.builder().tableName("uac_user").beanName("User").remarks("用户").build();
         GlobalConfig globalConfig = GlobalConfig.builder()
+          			.configPath("/generate.properties")
                 .author("GuangRen")
                 .datePattern("yyyy/MM/dd")
                 .isCover(false)
