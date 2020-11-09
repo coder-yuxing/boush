@@ -16,6 +16,6 @@ public class PropertyHandlerTest {
 
         PropertyHandler propertyHandler = new PropertyHandler("./generate.properties");
         JdbcProperty jdbcProperty = propertyHandler.jdbcPropertyHandle();
-        Assert.assertEquals("Wge2I9RQZEZ9PJYQ", jdbcProperty.getPassword());
+        Assert.assertEquals("QOjM6y7471TTyNJj", jdbcProperty.getPassword());
     }
 }

@@ -31,6 +31,8 @@ public enum SqlMappingJavaTypeEnum {
     TIMESTAMP_2_DATE("TIMESTAMP", "Date", true, "java.util.Date"),
 
     INTEGER_2_INTEGER("INT", "Integer", false, "java.lang.Integer"),
+
+    LONG_TEXT_2_STRING("LONGTEXT", "String", false, "java.lang.String"),
     ;
 
 
